@@ -6,11 +6,10 @@
 #include "util.h"
 
 int
-main(int argc, char **argv)
-{
+main(int argc, char **argv) {
 	int i, j, k, d, n;
 
-	if (argc != 3)
+	if(argc != 3)
 		err(EX_USAGE, "usage: %s D N\n", argv[0]);
 
 	d = atoi(argv[1]);
@@ -24,9 +23,9 @@ main(int argc, char **argv)
 	gsl_matrix *AB = gsl_matrix_alloc(d * n, d);
 	gsl_qrng *sobol_generator = gsl_qrng_alloc(gsl_qrng_sobol, 2 * d);
 
-	for (i = 0; i < n; i++) {
+	for(i = 0; i < n; i++) {
 		gsl_qrng_get(sobol_generator, row);
-		for (j = 0; j < d; j++) {
+		for(j = 0; j < d; j++) {
 			gsl_matrix_set(A, i, j, row[j]);
 			gsl_matrix_set(B, i, j, row[d + j]);
 		}
@@ -34,9 +33,9 @@ main(int argc, char **argv)
 
 	gsl_qrng_free(sobol_generator);
 
-	for (k = 0; k < d; k++) {
-		for (j = 0; j < d; j++) {
-			if (j == k)
+	for(k = 0; k < d; k++) {
+		for(j = 0; j < d; j++) {
+			if(j == k)
 				gsl_matrix_get_col(subcol, B, k);
 			else
 				gsl_matrix_get_col(subcol, A, k);
