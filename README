@@ -1,0 +1,52 @@
+sa
+==
+
+**sa** is a sensitivity analysis tools written in C using GSL.
+
+tools
+-----
+
+- `./sa-rescale`: awk script for rescaling columns from `[0,1]`
+  interval to any other uniform region
+- `./sa-sample-random N D`:
+- `./sa-sample-sobol N D`: N points from the Sobol' sequence in D
+  dimensions (`N` entries)
+- `./sa-sample-saltelli N D`: N points from the Saltelli sapling
+  in D dimensions (`(N+2)*d` entries); it generates 2 Sobol' sequences,
+  A and B, sub-samples them into AB, and concatenates vertically
+- `./sa-sample-halton N D`:
+- `./sa-sample-niederreiter N D`:
+- `./sa-sample-recurrent N D`: NOT IMPLEMENTED
+- `./sa-sample-kronecker N D`: NOT IMPLEMENTED
+
+usage
+-----
+
+To generate 10 random points in a 4D space using a PRNG seeded with seed 10:
+
+	./sa-sample-random 10 4
+
+To generate 10 points of a 2D Sobol' sequence, and rescale x-axis to `[-1,1]`:
+
+	./sa-sample-sobol 10 2 | ./sa-rescale
+
+Note that `sa-rescale` needs to be edited to include the line in the
+`NR==1` block:
+
+	x[1,1] = -1; x[1,2] = 1;
+
+To plot a 2D Hatton sequence of 1000 points:
+
+	./sa-sample-hatton 1000 2 | ./sa-plot > hatton.png
+
+To reproduce Saltelli example from Wikipedia:
+
+	./sa-sample-saltelli 4 3
+
+references
+----------
+
+- <https://en.wikipedia.org/wiki/Variance-based_sensitivity_analysis>
+- <http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/>
+- <https://salib.github.io/SALib/>
+- <https://www.gnu.org/software/gsl/doc/html/>
