@@ -1,0 +1,9 @@
+#!/usr/bin/env gnuplot
+set term png size 400,400
+
+set title "sample"
+set xlabel "x1"
+set ylabel "x2"
+set key off
+
+plot '< cat -'
