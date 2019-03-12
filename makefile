@@ -1,19 +1,23 @@
 include config.mk
 
-BIN = sample
-SRC = sample.c util.c
+SRC = $(shell find . -type f -name '*.c')
+BIN = $(SRC:.c=)
 OBJ = $(SRC:.c=.o)
+DEP = $(SRC:.c=.d)
 
-all: sample
+all: dep $(BIN)
+
+dep: $(DEP)
 
 clean:
-	rm -f $(OBJ) $(BIN)
+	rm -f a.out $(BIN) $(DEP) $(OBJ)
 
-include dep.mk
+include $(SRC:.c=.d)
 
-.SUFFIXES: .c .o
+.SUFFIXES: .c .d .o
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-.o:
-	$(LD) $(LDFLAGS) -o $@ $(OBJ)
+.c.d:
+	$(CC) $(CFLAGS) $(LDFLAGS) -MMD $<
+	rm a.out
