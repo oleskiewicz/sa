@@ -40,7 +40,7 @@ sa_sample_saltelli(int d, int n) {
 	}
 
 	// A, B, AB: concatenate vertically
-	gsl_matrix * ABAB = gsl_matrix_alloc((d + 2) * n, d);
+	gsl_matrix *ABAB = gsl_matrix_alloc((d + 2) * n, d);
 	gsl_matrix_view a = gsl_matrix_submatrix(ABAB, 0, 0, n, d);
 	gsl_matrix_view b = gsl_matrix_submatrix(ABAB, n, 0, n, d);
 	gsl_matrix_view ab = gsl_matrix_submatrix(ABAB, 2 * n, 0, n * d, d);
