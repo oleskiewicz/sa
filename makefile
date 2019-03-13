@@ -1,23 +1,29 @@
 include config.mk
 
 SRC = $(shell find . -type f -name '*.c')
-BIN = $(SRC:.c=)
 OBJ = $(SRC:.c=.o)
 DEP = $(SRC:.c=.d)
+BIN = $(SRC:.c=)
+SCRIPTS = \
+	sa-rescale \
+	sa-plot
 
 all: dep $(BIN)
+
+install: all
+	for f in $(BIN) $(SCRIPTS); do install -m 0755 $$f /usr/local/bin; done
 
 dep: $(DEP)
 
 clean:
-	rm -f a.out $(BIN) $(DEP) $(OBJ)
+	rm -f $(BIN) $(DEP) $(OBJ)
 
-include $(SRC:.c=.d)
+-include $(SRC:.c=.d)
 
 .SUFFIXES: .c .d .o
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 .c.d:
-	$(CC) $(CFLAGS) $(LDFLAGS) -MMD $<
-	rm a.out
+	$(CC) $(CFLAGS) $(LDFLAGS) -MMD $< > $@
+	rm -f a.out
