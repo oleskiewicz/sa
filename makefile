@@ -11,7 +11,7 @@ SCRIPTS = \
 all: dep $(BIN)
 
 install: all
-	for f in $(BIN) $(SCRIPTS); do install -m 0755 $$f /usr/local/bin; done
+	for f in $(BIN) $(SCRIPTS); do install -m 0755 $$f $(PREFIX)/bin; done
 
 dep: $(DEP)
 
