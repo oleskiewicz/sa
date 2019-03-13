@@ -27,6 +27,8 @@ tools
 - `./sa-sample-recurrent N D`: NOT IMPLEMENTED
 - `./sa-sample-kronecker N D`: NOT IMPLEMENTED
 
+A simple `Dockerfile` is included.
+
 usage
 -----
 
