@@ -6,4 +6,4 @@ set xlabel "x1"
 set ylabel "x2"
 set key off
 
-plot '< cat -'
+plot '< cat -' using 1:2
