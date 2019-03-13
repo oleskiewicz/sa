@@ -18,12 +18,14 @@ tools
   interval to any other uniform region
 - `./sa-sample-random N D`:
 - `./sa-sample-sobol N D`: N points from the Sobol' sequence in D
-  dimensions (`N` entries)
+  dimensions
 - `./sa-sample-saltelli N D`: N points from the Saltelli sapling
   in D dimensions (`(N+2)*d` entries); it generates 2 Sobol' sequences,
-  A and B, sub-samples them into AB, and concatenates vertically
-- `./sa-sample-halton N D`:
-- `./sa-sample-niederreiter N D`:
+  A and B, sub-samples them into AB, and concatenates vertically, as per
+  saltelli2010
+- `./sa-sample-halton N D`: N points from D-dimensional Halton sequence
+- `./sa-sample-niederreiter N D`: N points from D-dimensional Niederreiter
+  sequence
 - `./sa-sample-recurrent N D`: NOT IMPLEMENTED
 - `./sa-sample-kronecker N D`: NOT IMPLEMENTED
 
