@@ -41,9 +41,10 @@ A simple `Dockerfile` is included.
 Usage
 -----
 
-To generate 10 random points in a 4D space using a PRNG seeded with seed 10:
+To generate 20 random points in a 4D space using a PRNG seeded with seed 10 (if
+GSL_RNG_SEED is not defined, it is 0 by default):
 
-	./sa-sample-random 10 4
+	GSL_RNG_SEED=10 ./sa-sample-random 20 4
 
 To generate 10 points of a 2D Sobol' sequence, and rescale x-axis to `[-1,1]`:
 
