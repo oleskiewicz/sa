@@ -38,6 +38,7 @@ Tools
 
 A simple `Dockerfile` is included.
 
+
 Usage
 -----
 
@@ -59,6 +60,15 @@ To reproduce Saltelli sampling example from Wikipedia:
 
 	./sa-sample-saltelli 4 3
 
+To run sensitivity analysis on Ishigami function with default a & b values,
+using 1000 points in Saltelli sequence (remember to change sa-rescale values to
+[-pi, pi] ranges):
+
+	./sa-sample-saltelli 1000 3 |
+		./sa-rescale |
+		./sa-eval-ishigami 7 0.05 |
+		./sa-analyse-saltelli 1000 3
+
 To reproduce Figure 1. from "Unreasonable Effectiveness of Quasirandom Sequences":
 
 	./sa-sample-recurrent    620 2 | ./sa-plot > recurrent.png
@@ -69,6 +79,7 @@ To reproduce Figure 1. from "Unreasonable Effectiveness of Quasirandom Sequences
 
 Note that the Kronecker sequence needs different recurrence parameters, and is
 not implemented for now.
+
 
 References
 ----------
