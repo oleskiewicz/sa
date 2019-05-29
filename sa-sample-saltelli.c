@@ -3,7 +3,6 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_qrng.h>
 
-#include "sa-sample-sobol.h"
 #include "util.h"
 
 gsl_matrix *
