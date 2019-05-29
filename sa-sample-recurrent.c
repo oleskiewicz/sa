@@ -9,14 +9,14 @@ static inline double
 phi(double d, int precision) {
 	double x = 2.0;
 	for(int i = 0; i < precision; i++)
-		x = pow(1.0+x, 1.0/(d+1.0));
+		x = pow(1.0 + x, 1.0 / (d + 1.0));
 	return x;
 }
 
 static inline double
 recurrence(int n, double s, double alpha) {
 	double r_whole, r_frac;
-	r_frac = modf(s + n*alpha, &r_whole);
+	r_frac = modf(s + n * alpha, &r_whole);
 	return r_frac;
 }
 
@@ -33,12 +33,12 @@ main(int argc, char **argv) {
 
 	double alpha[d];
 	for(int j = 0; j < d; j++) {
-		alpha[j] = pow(1.0/phi(d, precision), 1.0+j);
+		alpha[j] = pow(1.0 / phi(d, precision), 1.0 + j);
 	}
 
 	for(int i = 0; i < n; i++) {
 		for(int j = 0; j < d; j++) {
-			printf("%.5f ", recurrence(i+1, seed, alpha[j]));
+			printf("%.5f ", recurrence(i + 1, seed, alpha[j]));
 		}
 		printf("\n");
 	}

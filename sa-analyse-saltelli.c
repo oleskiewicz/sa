@@ -7,13 +7,13 @@
 #include "util.h"
 
 void
-sa_analyse_saltelli(gsl_vector *Y, int n, int d) {
+sa_analyse_saltelli(gsl_vector * Y, int n, int d) {
 	for(int i = 0; i < d; i++) {
 		double s = 0.0, st = 0.0;
 		for(int j = 0; j < n; j++) {
 			double a = gsl_vector_get(Y, j),
-			       b = gsl_vector_get(Y, j + n),
-			       ab = gsl_vector_get(Y, j + n + (n*(i+1)));
+				b = gsl_vector_get(Y, j + n),
+				ab = gsl_vector_get(Y, j + n + (n * (i + 1)));
 
 			s += b * (ab - a);
 			st += pow(a - ab, 2.0);
