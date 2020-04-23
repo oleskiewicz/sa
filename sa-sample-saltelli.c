@@ -1,12 +1,13 @@
 #include <err.h>
-#include <sysexits.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_qrng.h>
+#include <sysexits.h>
 
 #include "util.h"
 
 gsl_matrix *
-sa_sample_saltelli(int d, int n) {
+sa_sample_saltelli(int d, int n)
+{
 	double row[2 * d];
 	gsl_vector *col = gsl_vector_alloc(d * n);
 	gsl_vector *subcol = gsl_vector_alloc(n);
@@ -16,9 +17,9 @@ sa_sample_saltelli(int d, int n) {
 	gsl_qrng *sobol_generator = gsl_qrng_alloc(gsl_qrng_sobol, 2 * d);
 
 	// A, B matrices
-	for(int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		gsl_qrng_get(sobol_generator, row);
-		for(int j = 0; j < d; j++) {
+		for (int j = 0; j < d; j++) {
 			gsl_matrix_set(A, i, j, row[j]);
 			gsl_matrix_set(B, i, j, row[d + j]);
 		}
@@ -26,9 +27,9 @@ sa_sample_saltelli(int d, int n) {
 	gsl_qrng_free(sobol_generator);
 
 	// AB matrix
-	for(int k = 0; k < d; k++) {
-		for(int j = 0; j < d; j++) {
-			if(j == k)
+	for (int k = 0; k < d; k++) {
+		for (int j = 0; j < d; j++) {
+			if (j == k)
 				gsl_matrix_get_col(subcol, B, k);
 			else
 				gsl_matrix_get_col(subcol, A, k);
@@ -54,10 +55,10 @@ sa_sample_saltelli(int d, int n) {
 	return ABAB;
 }
 
-
 int
-main(int argc, char **argv) {
-	if(argc != 3)
+main(int argc, char **argv)
+{
+	if (argc != 3)
 		errx(EX_USAGE, "usage: %s N D\n", argv[0]);
 
 	int n = atoi(argv[1]), d = atoi(argv[2]);
@@ -67,5 +68,6 @@ main(int argc, char **argv) {
 	gsl_matrix_print(AB);
 
 	gsl_matrix_free(AB);
+
 	return 0;
 }
